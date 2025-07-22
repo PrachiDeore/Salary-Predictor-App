@@ -9,7 +9,7 @@ from streamlit_lottie import st_lottie
 import random
 
 # ===== Page Configuration =====
-st.set_page_config(page_title="Salary Predictor Pro 💼", page_icon="💸", layout="centered")
+st.set_page_config(page_title="Salary Predictor App💼", page_icon="💸", layout="centered")
 
 # ===== Custom CSS for Styling =====
 st.markdown("""
