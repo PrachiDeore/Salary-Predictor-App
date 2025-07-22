@@ -1,4 +1,4 @@
-## Employee Salary Predictor App💼💰
+## Employee Salary Predictor Pro💼💰
 An interactive web application built with Streamlit that predicts employee salaries based on profiles, adjusts for cost-of-living across cities, and provides career insights.
 
 🔗 Live Demo: 
