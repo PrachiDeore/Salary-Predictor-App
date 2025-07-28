@@ -46,8 +46,16 @@ model = joblib.load("rf_model_compressed.pkl")
 education_encoding = {"Enter Education": 0, "High School": 1, "Bachelor's": 2, "Master's": 3, "PhD": 4}
 location_encoding = {"Enter Location": 0, "Rural": 1, "Suburban": 2, "Urban": 3}
 job_title_encoding = {
-    'Enter Job Title': 0, 'Clerk': 1, 'Customer Support': 2, 'Data Analyst': 3, 'Data Scientist': 4,
-    'Director': 5, 'HR Manager': 6, 'Product Manager': 7, 'Software Engineer': 8, 'Technician': 9
+    'Enter Job Title': 0,
+    'Clerk': 1,
+    'Customer Support': 2,
+    'Data Analyst': 3,
+    'Data Scientist': 4,
+    'Director (Department Head/General Management)': 5,
+    'HR Manager': 6,
+    'Product Manager': 7,
+    'Software Engineer': 8,
+    'Technician': 9
 }
 gender_encoding = {'Male': 0, 'Female': 1}
 
@@ -153,7 +161,6 @@ if submitted:
                 delta=f"{((adjusted_salary - predicted_salary)/predicted_salary)*100:.1f}%"
             )
 
-        # Salary Comparison Bar Chart
         fig_city = px.bar(
             x=[current_city, target_city],
             y=[predicted_salary, adjusted_salary],
@@ -267,45 +274,64 @@ if submitted:
         """
         st.info(summary)
 
-        # ===== Detailed Career Advice & Tips =====
+        # ===== Career Advice & Tips =====
         st.markdown("### 🎯 Career Advice & Tips")
         tips = {
-            'Clerk': "• Master spreadsheet tools like Excel and improve typing speed. \n"
-                     "• Pay strong attention to accuracy and detail; small mistakes can lead to bigger problems. \n"
-                     "• Regularly update your filing and information management knowledge. \n"
-                     "• Build relationships with colleagues—they can help you learn better processes and time-saving shortcuts.",
-            'Customer Support': "• Always display patience and empathy, even with difficult clients. \n"
-                                "• Get comfortable with popular customer relationship management (CRM) software (like Salesforce or Zendesk). \n"
-                                "• Sharpen your listening skills, and practice clear, polite communication. \n"
-                                "• Learn how to de-escalate situations calmly and document issues completely.",
-            'Data Analyst': "• Develop your Excel skills and learn how to use pivot tables and charts for reporting. \n"
-                            "• Progress to mastering SQL for databases and Python for automating analysis. \n"
-                            "• Practice creating clear visualizations using Tableau or Power BI. \n"
-                            "• Focus on finding practical insights in data and sharing them simply with non-experts.",
-            'Data Scientist': "• Build strong programming (Python, R), machine learning, and statistics foundations. \n"
-                              "• Join Kaggle or GitHub and publish hands-on projects. \n"
-                              "• Read papers and follow open-source ML tools like TensorFlow or PyTorch. \n"
-                              "• Network with the data science community for mentorship and learning.",
-            'Director': "• Work on big-picture strategy and guiding your team towards common goals. \n"
-                        "• Practice decision-making by considering company vision and stakeholder needs. \n"
-                        "• Improve public speaking and presentation abilities for board and client meetings. \n"
-                        "• Mentor junior leaders and develop strong delegation skills.",
-            'HR Manager': "• Gain in-depth knowledge of employment law, payroll, and workplace policies.\n"
-                          "• Use HR analytics and modern HRM software for better hiring and workforce planning.\n"
-                          "• Enhance conflict resolution, negotiation, and employee engagement skills.\n"
-                          "• Promote wellbeing, diversity, equity, and inclusion initiatives.",
-            'Product Manager': "• Always begin with understanding the user's needs. Create clear specifications for your team.\n"
-                               "• Learn agile, SCRUM, and kanban for project management.\n"
-                               "• Practice communicating between engineering, design, and marketing teams.\n"
-                               "• Track the market, analyze competitors, and test product features with real users.",
-            'Software Engineer': "• Keep learning new languages, data structures, algorithms, and system design.\n"
-                                "• Work on open-source projects and contribute to GitHub to grow your portfolio.\n"
-                                "• Study cloud platforms and DevOps best practices.\n"
-                                "• Regularly review and refactor your code for quality and efficiency.",
-            'Technician': "• Get certified in your technical field (like A+, networking, specific machinery).\n"
-                          "• Learn troubleshooting step-by-step with real case studies.\n"
-                          "• Develop clear documentation and reporting habits for issues and fixes.\n"
-                          "• Stay current with technological changes—attend workshops and read trade magazines."
+            'Clerk': (
+                "• Master spreadsheet tools like Excel and improve typing speed.\n"
+                "• Pay strong attention to accuracy and detail; small mistakes can lead to bigger problems.\n"
+                "• Regularly update your filing and information management knowledge.\n"
+                "• Build relationships with colleagues—they can help you learn better processes and time-saving shortcuts."
+            ),
+            'Customer Support': (
+                "• Always display patience and empathy, even with difficult clients.\n"
+                "• Get comfortable with popular customer relationship management (CRM) software (like Salesforce or Zendesk).\n"
+                "• Sharpen your listening skills, and practice clear, polite communication.\n"
+                "• Learn how to de-escalate situations calmly and document issues completely."
+            ),
+            'Data Analyst': (
+                "• Develop your Excel skills and learn how to use pivot tables and charts for reporting.\n"
+                "• Progress to mastering SQL for databases and Python for automating analysis.\n"
+                "• Practice creating clear visualizations using Tableau or Power BI.\n"
+                "• Focus on finding practical insights in data and sharing them simply with non-experts."
+            ),
+            'Data Scientist': (
+                "• Build strong programming (Python, R), machine learning, and statistics foundations.\n"
+                "• Join Kaggle or GitHub and publish hands-on projects.\n"
+                "• Read papers and follow open-source ML tools like TensorFlow or PyTorch.\n"
+                "• Network with the data science community for mentorship and learning."
+            ),
+            'Director (Department Head/General Management)': (
+                "• Lead a department or business unit, focusing on big-picture strategy and delivering results.\n"
+                "• Set clear goals for your teams and monitor progress towards company targets.\n"
+                "• Drive cross-department collaboration and foster a positive work culture.\n"
+                "• Improve your decision-making, financial acumen, and public speaking for board meetings.\n"
+                "• Mentor junior managers and work closely with executives on organizational priorities."
+            ),
+            'HR Manager': (
+                "• Gain in-depth knowledge of employment law, payroll, and workplace policies.\n"
+                "• Use HR analytics and modern HRM software for better hiring and workforce planning.\n"
+                "• Enhance conflict resolution, negotiation, and employee engagement skills.\n"
+                "• Promote wellbeing, diversity, equity, and inclusion initiatives."
+            ),
+            'Product Manager': (
+                "• Always begin with understanding the user's needs. Create clear specifications for your team.\n"
+                "• Learn agile, SCRUM, and kanban for project management.\n"
+                "• Practice communicating between engineering, design, and marketing teams.\n"
+                "• Track the market, analyze competitors, and test product features with real users."
+            ),
+            'Software Engineer': (
+                "• Keep learning new languages, data structures, algorithms, and system design.\n"
+                "• Work on open-source projects and contribute to GitHub to grow your portfolio.\n"
+                "• Study cloud platforms and DevOps best practices.\n"
+                "• Regularly review and refactor your code for quality and efficiency."
+            ),
+            'Technician': (
+                "• Get certified in your technical field (like A+, networking, specific machinery).\n"
+                "• Learn troubleshooting step-by-step with real case studies.\n"
+                "• Develop clear documentation and reporting habits for issues and fixes.\n"
+                "• Stay current with technological changes—attend workshops and read trade magazines."
+            )
         }
 
         if job_title in tips:
